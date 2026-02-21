@@ -1,0 +1,8 @@
+flowchart LR
+
+BoardUI[Requests Board UI] -->|Update Status| API[Express API]
+API --> DB[(PostgreSQL Neon)]
+API --> Audit[Audit Log Writer]
+Audit --> DB
+API --> WS[WebSocket Broadcast]
+WS --> BoardUI
