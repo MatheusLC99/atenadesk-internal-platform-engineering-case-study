@@ -1,0 +1,11 @@
+flowchart TD
+
+KBUI[Knowledge Base UI] -->|Create Article| API[Express API]
+KBUI -->|Upload File| UploadReq[Upload Request]
+UploadReq --> API
+API --> Multer[Multer Pipeline]
+Multer --> Storage[(Attachment Storage)]
+API --> DB[(PostgreSQL Neon)]
+API --> Audit[Audit Log Writer]
+Audit --> DB
+API --> KBUI
