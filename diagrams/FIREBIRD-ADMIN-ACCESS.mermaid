@@ -1,0 +1,10 @@
+flowchart TD
+
+AdminUI[Admin Panel] -->|Admin Action| API[Express API]
+API --> AuthCheck[Require Admin Middleware]
+AuthCheck -->|Allowed| Firebird[(Legacy Firebird DB)]
+Firebird --> API
+API --> AdminUI
+
+API --> Audit[Audit Log Writer]
+Audit --> DB[(PostgreSQL Neon)]
