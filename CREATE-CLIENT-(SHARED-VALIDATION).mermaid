@@ -1,0 +1,13 @@
+flowchart TD
+
+APP[Clients Module UI] --> F[Form Input<br/>React Hook Form]
+F -->|Client validation| ZC[Zod schema (shared)]
+ZC -->|Valid| REQ[POST /clients]
+REQ --> API[Express API]
+API -->|Server validation| ZS[Zod schema (shared)]
+ZS -->|Valid| DB[(PostgreSQL/Neon)]
+DB --> API --> OK[Success Response]
+OK --> APP
+
+API --> LOG[Audit Log Writer]
+LOG --> DB
