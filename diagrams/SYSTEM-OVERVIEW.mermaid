@@ -1,0 +1,57 @@
+flowchart LR
+
+%% =========================
+%% Actors
+%% =========================
+User[Employee User]
+
+%% =========================
+%% Frontend Layer
+%% =========================
+FE[Frontend SPA
+React 18 + TypeScript
+Vite + Tailwind + shadcn/ui]
+
+Charts[Recharts Analytics]
+PDF[jsPDF Export Engine]
+
+%% =========================
+%% Backend Layer
+%% =========================
+API[Express API
+TypeScript]
+
+Auth[Auth Layer
+Passport.js
+express-session
+bcrypt]
+
+Realtime[WebSockets ws]
+Uploads[Multer Upload Pipeline]
+Audit[Audit Logging Layer]
+
+%% =========================
+%% Data Layer
+%% =========================
+Postgres[(PostgreSQL
+Neon Serverless)]
+
+Firebird[(Legacy Firebird DB)]
+
+%% =========================
+%% Connections
+%% =========================
+User --> FE
+
+FE -->|HTTP Requests| API
+FE --> Charts
+FE --> PDF
+
+API --> Auth
+API --> Postgres
+API --> Firebird
+API --> Realtime
+API --> Uploads
+API --> Audit
+
+Audit --> Postgres
